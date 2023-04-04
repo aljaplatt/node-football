@@ -1,41 +1,24 @@
 import express from "express";
-import { v4 as uuidv4 } from 'uuid'
 
-import teams from "./data.js";
+import {getTeams, getTeam, addTeam} from "./handlers/teams.js";
 
 // initialise express - call function and 
 const app = express();
 const PORT = 3000;
 
 // parse request body as JSON
+// app.use(bodyParser.json()) // heavier non-builtin version 
 app.use(express.json())
 
 app.get("/teams", (req, res) => {
-    res.json({
-        "key" : "value",
-        "payload": teams
-    })
+    res.json(getTeams())
 })
 app.get("/team/:teamId", (req, res) => {
-    console.log(req.params)
-    const teamId = req.params.teamId
-    const requestedTeam = teams.find(obj => obj.id === teamId)
-    // console.(teamId)
-    res.json({
-        "key" : "value",
-        "payload": requestedTeam
-    })
+    res.json(getTeam(req))
 })
 
 app.post("/add-team", (req, res) => {
-    const request = req.body
-    request.id = uuidv4()
-    console.log(request)
-    teams.push(request)
-    res.json({
-        "message": "success",
-        "payload": teams
-    })
+    res.json(addTeam(req))
 })
 
 // app.listen(PORT)
