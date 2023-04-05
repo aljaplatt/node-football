@@ -2,6 +2,11 @@ import { v4 as uuidv4 } from 'uuid'
 
 import teams from "../data.js";
 
+
+export function sum(a, b) {
+    return a + b;
+  }
+
 export function getTeams() {
     return {
         "message" : "success",
