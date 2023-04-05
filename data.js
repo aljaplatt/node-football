@@ -9,8 +9,8 @@
 
 const teams = [{
     teamName: 'Manchester United',
-    League: 'Premier League',
-    Nation: 'England,',
+    league: 'Premier League',
+    nation: 'England,',
     manager: 'Erik Ten Hag',
     numLeagueTitles: 20,
     established: 1878,

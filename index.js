@@ -2,6 +2,7 @@ import express from "express";
 
 import {getTeams, getTeam, addTeam} from "./handlers/teams.js";
 
+
 // initialise express - call function and 
 const app = express();
 const PORT = 3000;

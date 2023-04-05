@@ -1,6 +1,7 @@
 import { v4 as uuidv4 } from 'uuid'
 
 import teams from "../data.js";
+import { Team } from "../models/team.js";
 
 
 export function sum(a, b) {
@@ -43,12 +44,28 @@ return {
 
 
 export function addTeam(req) {
+    //TODO - Add validator class, check all fields present
+    //TODO - add anagram method that return the mixed up letters of the team name 
     const request = req.body
-    request.id = uuidv4()
-    console.log(request)
-    teams.push(request)
-    return {
-        "message": "success",
-        "teams": teams
+    console.log("req: ", request)
+    let newTeam = new Team(
+        request['teamName'],
+        request['league'],
+        request['nation'],
+        request['manager'],
+        request['numLeagueTitles'],
+        request['established']
+        )
+    // request.id = uuidv4()
+    console.log("newTeam: ", newTeam)
+    if (newTeam){
+        teams.push(newTeam)
+        return {
+            "message": "success",
+            "teams": teams
+        }
+    } else {
+        return {"message" : "Could not add team"}
     }
+    
 } 
