@@ -1,4 +1,4 @@
-import {getTeams, getTeam, addTeam, sum} from "../teams.js";
+import {getTeams, sum} from "../teams.js";
 
 
 // test('adds 1 + 2 to equal 3', () => {

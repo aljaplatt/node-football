@@ -13,7 +13,8 @@ const teams = [{
     Nation: 'England,',
     manager: 'Erik Ten Hag',
     numLeagueTitles: 20,
-    established: 1878
+    established: 1878,
+    id: "cef6eef7-7a86-4574-bbba-3bd47d7f5434"
 }]
 
 export default teams

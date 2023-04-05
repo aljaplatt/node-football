@@ -15,6 +15,8 @@ export function getTeams() {
 }
 
 
+
+
 export function getTeam(req) {
 //* url params
 console.log(req.params)
