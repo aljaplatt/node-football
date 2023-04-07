@@ -8,15 +8,20 @@ export class Team {
         this.manager = manager
         this.numLeagueTitles = numLeagueTitles
         this.established = established
-        this.anagram = undefined
+        this.anagram = teamName.toLowerCase().split('').sort().join('')
         this.id = uuidv4()
     }
+
     // //todo - getter setter for id? 
     // setId(){
     //     this.id = uuidv4()
     // }
 
-    createAnagram(){
-        this.anagram = this.teamName.split('').sort().join('')
-    }
+    // createAnagram(){
+    //     // this.anagram = this.teamName.toLowerCase().split('').sort().join('')
+    //     // console.log("this.anagram: ", this.anagram)
+    //     // return this.anagram
+    //     console.log(this.teamName)
+    //     return this.teamName
+    // }
 }

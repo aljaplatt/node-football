@@ -1,5 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
-
 import teams from "../data.js";
 import { Team } from "../models/team.js";
 
@@ -17,6 +15,23 @@ export function getTeams() {
 
 
 
+
+export function guessTeam() {
+    // loop through team and select random team 
+    console.log("teams.length: ", teams.length)
+    // teamLength = 
+    let randNum = Math.floor(Math.random() * teams.length) + 1;
+    console.log("randNum: ", randNum)
+    const randomTeam = teams[randNum]
+    // const anagram =  
+    // console.log("anagram: ", anagram)
+    return {
+        "anagram" : randomTeam.anagram,
+        "id": randomTeam.id
+    }
+
+
+}
 
 export function getTeam(req) {
 //* url params

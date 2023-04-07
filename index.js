@@ -1,6 +1,6 @@
 import express from "express";
 
-import {getTeams, getTeam, addTeam} from "./handlers/teams.js";
+import { getTeams, getTeam, addTeam, guessTeam } from "./handlers/teams.js";
 
 
 // initialise express - call function and 
@@ -14,6 +14,11 @@ app.use(express.json())
 app.get("/teams", (req, res) => {
     res.json(getTeams())
 })
+
+app.get("/guess-team", (req, res) => {
+    res.json(guessTeam())
+})
+
 app.get("/team/:teamId", (req, res) => {
     res.json(getTeam(req))
 })
