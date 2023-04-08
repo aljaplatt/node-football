@@ -2,10 +2,6 @@ import teams from "../data.js";
 import { Team } from "../models/team.js";
 
 
-export function sum(a, b) {
-    return a + b;
-  }
-
 export function getTeams() {
     return {
         "message" : "success",
