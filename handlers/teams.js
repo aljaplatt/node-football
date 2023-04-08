@@ -1,15 +1,17 @@
-import teams from "../data.js";
+// import teams from "../data.js";
+import query from "../db/index.js"
 import { Team } from "../models/team.js";
 
 
-export function getTeams() {
+export async function getTeams() {
+    const teams = await query(`SELECT * FROM teams;`)
+    console.log(teams.rows)
+    // return teams.rows
     return {
-        "message" : "success",
-        "teams": teams
+        // "message" : "success",
+        "teams": teams.rows
     }
 }
-
-
 
 
 export function guessTeam() {
@@ -25,11 +27,10 @@ export function guessTeam() {
         "anagram" : randomTeam.anagram,
         "id": randomTeam.id
     }
-
-
 }
 
-export function getTeam(req) {
+
+export async function getTeam(req) {
 //* url params
 console.log(req.params)
 const teamId = req.params.teamId
@@ -39,17 +40,18 @@ const teamId = req.params.teamId
 console.log(teamId)
 // loop through obj in teams array until you find obj with matching id 
 // const requestedTeam = teams.find(team => team.id === teamId)
-const requestedTeam = teams.find(function(team) {
-    return team.id === teamId
-})
-if (!requestedTeam) {
-    console.log("requestedTeam: ", requestedTeam)
-    return {
-        "message": `The requested team id ${teamId} could not be found`
-    }
-}
+// const requestedTeam = teams.find(function(team) {
+//     return team.id === teamId
+// })
+const requestedTeam = await query(`SELECT * FROM teams WHERE teamId = $1`, [teamId])
+// if (!requestedTeam) {
+//     console.log("requestedTeam: ", requestedTeam)
+//     return {
+//         "message": `The requested team id ${teamId} could not be found`
+//     }
+// }
 return {
-    "team": requestedTeam
+    "team": requestedTeam.rows
 } 
 }
 
