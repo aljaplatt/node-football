@@ -67,17 +67,6 @@ export async function addTeam(req) {
             request['numLeagueTitles'],
             request['established']
             )
-    } catch (error){
-        console.log("addTeam", error)
-    }
-    let newTeam = new Team(
-        request['teamName'],
-        request['league'],
-        request['nation'],
-        request['manager'],
-        request['numLeagueTitles'],
-        request['established']
-        )
     const teamName = newTeam.teamName;
     const league = newTeam.league;
     const nation = newTeam.nation;
@@ -89,8 +78,9 @@ export async function addTeam(req) {
     const res = await query(`INSERT INTO teams (teamName, league, nation, manager, numLeagueTitles, established, anagram, teamId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING teamName`, [teamName,league,nation,manager,numLeagueTitles,established,anagram,teamId] );
     console.log("Table populated: ", res.rows);
 
-    return {
-        "newteam": newTeam
+    return goodResponse200(newTeam)
+    } catch (err) {
+        console.log("addTeam", err)
+        return badRequest(err.message)
     }
-    
 } 
