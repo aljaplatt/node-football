@@ -24,7 +24,7 @@ app.get("/team/:teamId", async (req, res) => {
 })
 
 app.post("/add-team", async (req, res) => {
-    res.json(addTeam(req))
+    res.json(await addTeam(req))
 })
 
 // app.listen(PORT)

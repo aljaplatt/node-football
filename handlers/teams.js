@@ -38,7 +38,7 @@ return {
 }
 
 //TODO - REFACTOR TO ADD TO ESQL, NOT ARR 
-export function addTeam(req) {
+export async function addTeam(req) {
 
     const request = req.body
     console.log("req: ", request)
@@ -50,16 +50,19 @@ export function addTeam(req) {
         request['numLeagueTitles'],
         request['established']
         )
+    const teamName = newTeam.teamName;
+    const league = newTeam.league;
+    const nation = newTeam.nation;
+    const manager = newTeam.manager;
+    const numLeagueTitles = newTeam.numLeagueTitles;
+    const established = newTeam.established;
+    const anagram = newTeam.anagram;
+    const teamId = newTeam.teamId;
+    const res = await query(`INSERT INTO teams (teamName, league, nation, manager, numLeagueTitles, established, anagram, teamId) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING teamName`, [teamName,league,nation,manager,numLeagueTitles,established,anagram,teamId] );
+    console.log("Table populated: ", res.rows);
 
-    console.log("newTeam: ", newTeam)
-    if (newTeam){
-        teams.push(newTeam)
-        return {
-            "message": "success",
-            "teams": teams
-        }
-    } else {
-        return {"message" : "Could not add team"}
+    return {
+        "newteam": newTeam
     }
     
 } 
