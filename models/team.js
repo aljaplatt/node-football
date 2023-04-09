@@ -9,7 +9,7 @@ export class Team {
         this.numLeagueTitles = numLeagueTitles
         this.established = established
         this.anagram = teamName.toLowerCase().split('').sort().join('')
-        this.id = uuidv4()
+        this.teamId = uuidv4()
     }
 
     // //todo - getter setter for id? 
