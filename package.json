@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon -r dotenv/config index.js",
     "dbcreatetable": "node ./db/scripts/createTable.js",
     "dbpopulatetable": "node ./db/scripts/populateTable.js",
     "test": "node --experimental-vm-modules ./node_modules/.bin/jest"

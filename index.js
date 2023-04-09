@@ -16,11 +16,11 @@ app.get("/teams", async (req, res) => {
 })
 
 app.get("/guess-team", async (req, res) => {
-    res.json(guessTeam())
+    res.json(await guessTeam())
 })
 
 app.get("/team/:teamId", async (req, res) => {
-    res.json(getTeam(req))
+    res.json(await getTeam(req))
 })
 
 app.post("/add-team", async (req, res) => {

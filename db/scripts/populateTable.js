@@ -1,7 +1,6 @@
 import query from "../index.js" 
 import teams from "../../data.js";
 
-const sqlString = `CREATE TABLE IF NOT EXISTS teams (id SERIAL PRIMARY KEY, league TEXT, nation TEXT, manager TEXT, numLeagueTitles  INT, established INT, anagram TEXT, teamId TEXT)`;
 
 async function populateTable(){
     for (let i = 0; i < teams.length; i++){
