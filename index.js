@@ -11,19 +11,19 @@ const PORT = 3000;
 // app.use(bodyParser.json()) // heavier non-builtin version 
 app.use(express.json())
 
-app.get("/teams", (req, res) => {
-    res.json(getTeams())
+app.get("/teams", async (req, res) => {
+    res.json(await getTeams())
 })
 
-app.get("/guess-team", (req, res) => {
-    res.json(guessTeam())
+app.get("/guess-team", async (req, res) => {
+    res.json(await guessTeam())
 })
 
-app.get("/team/:teamId", (req, res) => {
-    res.json(getTeam(req))
+app.get("/team/:teamId", async (req, res) => {
+    res.json(await getTeam(req))
 })
 
-app.post("/add-team", (req, res) => {
+app.post("/add-team", async (req, res) => {
     res.json(addTeam(req))
 })
 
