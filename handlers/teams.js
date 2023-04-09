@@ -1,5 +1,5 @@
 import query from "../db/index.js"
-import { Team } from "../models/team.js";
+import { Team } from "../models/requests/team.js";
 
 
 export async function getTeams() {
@@ -37,11 +37,21 @@ return {
 } 
 }
 
-//TODO - REFACTOR TO ADD TO ESQL, NOT ARR 
-export async function addTeam(req) {
 
+export async function addTeam(req) {
     const request = req.body
-    console.log("req: ", request)
+    try {
+        let newTeam = new Team(
+            request['teamName'],
+            request['league'],
+            request['nation'],
+            request['manager'],
+            request['numLeagueTitles'],
+            request['established']
+            )
+    } catch (error){
+        console.log("addTeam", error)
+    }
     let newTeam = new Team(
         request['teamName'],
         request['league'],
