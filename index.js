@@ -1,6 +1,6 @@
 import express from "express";
 
-import { getTeams, getTeam, addTeam, guessTeam } from "./handlers/teams.js";
+import { getTeamsController, getTeamController, addTeamController, guessTeamController } from "./handlers/teams.js";
 
 
 // initialise express - call function and 
@@ -12,19 +12,19 @@ const PORT = 3000;
 app.use(express.json())
 
 app.get("/teams", async (req, res) => {
-    res.json(await getTeams())
+    res.json(await getTeamsController())
 })
 
 app.get("/guess-team", async (req, res) => {
-    res.json(await guessTeam())
+    res.json(await guessTeamController())
 })
 
 app.get("/team/:teamId", async (req, res) => {
-    res.json(await getTeam(req))
+    res.json(await getTeamController(req))
 })
 
 app.post("/add-team", async (req, res) => {
-    res.json(await addTeam(req))
+    res.json(await addTeamController(req))
 })
 
 // app.listen(PORT)

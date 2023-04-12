@@ -1,14 +1,14 @@
-import query from "../db/index.js"
+import query from "../dbConfig/index.js"
+import { dbGetTeams } from "../models/db/dbGetTeams.js";
+import { dbGuessTeam } from "../models/db/dbGuessTeam.js";
 import { Team } from "../models/requests/team.js";
 import { badRequest } from "../models/responses/badRequest.js";
 import { goodResponse200 } from "../models/responses/goodResponse.js";
 
 
-export async function getTeams() {
+export async function getTeamsController() {
     try{
-        const teams = await query(`SELECT * FROM teams;`)
-        // console.log(teams.rows)
-        return goodResponse200(teams.rows)
+        return goodResponse200(await dbGetTeams())
     } catch (err) {
         console.log(err)
         return badRequest(err.message)
@@ -16,24 +16,16 @@ export async function getTeams() {
 }
 
 
-export async function guessTeam() {
+export async function guessTeamController() {
     try {
-        let teams = await query(`SELECT * FROM teams;`)
-        teams = teams.rows
-        const randNum = Math.floor(Math.random() * teams.length);
-        const randomTeam = teams[randNum]
-        const data = {
-            "teamid": randomTeam.teamid,
-            "anagram" : randomTeam.anagram
-            }
-        return goodResponse200(data)
+        return goodResponse200(await dbGuessTeam())
     } catch (err) {
         return badRequest(err.message)
     }
     }
 
 
-export async function getTeam(req) {
+export async function getTeamController(req) {
     try {
         //* url params
         const teamId = req.params.teamId
@@ -56,7 +48,7 @@ export async function getTeam(req) {
 }
 
 
-export async function addTeam(req) {
+export async function addTeamController(req) {
     const request = req.body
     try {
         let newTeam = new Team(
