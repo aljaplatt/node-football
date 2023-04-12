@@ -1,6 +1,7 @@
 import query from "../dbConfig/index.js"
 import { dbGetTeams } from "../models/db/dbGetTeams.js";
 import { dbGuessTeam } from "../models/db/dbGuessTeam.js";
+import { dbGetTeam } from "../models/db/dbGetTeam.js";
 import { Team } from "../models/requests/team.js";
 import { badRequest } from "../models/responses/badRequest.js";
 import { goodResponse200 } from "../models/responses/goodResponse.js";
@@ -27,19 +28,7 @@ export async function guessTeamController() {
 
 export async function getTeamController(req) {
     try {
-        //* url params
-        const teamId = req.params.teamId
-        //* query params
-        // console.log(req.query)
-        // const teamId = req.query.teamId
-        let requestedTeam = await query(`SELECT * FROM teams WHERE teamId = $1`, [teamId])
-        requestedTeam = requestedTeam.rows
-        console.log("requestedTeam: ", requestedTeam.length)
-        if (requestedTeam.length) {
-            return goodResponse200(requestedTeam)
-        } else {
-            throw new Error('Team ID does not exist')
-        }  
+        return goodResponse200(await dbGetTeam(req)) 
     } catch (err) {
         console.log("catch:", err)
         return badRequest(err.message)
