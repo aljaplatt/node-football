@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors"
 
 import { getTeamsController, getTeamController, addTeamController, guessTeamController } from "./handlers/teams.js";
 
@@ -10,6 +11,7 @@ const PORT = 3000;
 // parse request body as JSON
 // app.use(bodyParser.json()) // heavier non-builtin version 
 app.use(express.json())
+app.use(cors())
 
 app.get("/teams", async (req, res) => {
     res.json(await getTeamsController())
